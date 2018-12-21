@@ -1,0 +1,110 @@
+﻿{% load staticfiles %}
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+         /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+         #map {
+             height: 100%;
+         }
+         /* Optional: Makes the sample page fill the window. */
+         html, body {
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--include the jQuery library-->
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>     
+        <!--include the highcharts library-->
+        <script src="http://code.highcharts.com/stock/highstock.js"></script>
+        <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        
+        var map;
+        var geocoder;
+        var myAddress = [];
+        var myCenter = { lat: 24.1209446, lng: 120.6742369 };
+       
+        function initMap() {
+            geocoder = new google.maps.Geocoder();
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: myCenter,
+                title: '中興大學',
+                zoom: 8
+            });
+
+            $.ajax({
+                url: "{% url 'map:getAddress' %}",
+                data: '',
+                dataType: 'json',
+                //success: getDataSuccess
+            }).done(function(data) {
+            	 console.log('getAddress success!!');
+            	 //console.log(data['lightAddresses']);
+            	 for (i = 0; i < data['lightAddresses'].length; i++) {
+                  codeAddress(data['lightAddresses'][i].toString());
+                  //console.log(data['lightAddresses'][i].toString());
+               }
+             })
+             .fail(function() {
+                  alert('連線失敗');
+             });
+
+        }
+
+        function getDataSuccess(data) {
+            for (i = 0; i < data.length; i++) {
+                codeAddress(data['lightAddresses'][i].toString());
+                //console.log(data['lightAddresses'][i].toString());
+            }
+        }
+
+
+function codeAddress(address1){
+    geocoder.geocode( { 'address':address1}, function(results, status) {
+      if (status == 'OK') {
+        var title_link = "<a href='https://www.google.com.tw/search?q="+address1+"+google&oq="+address1+"+google&sourceid=chrome&ie=UTF-8'>"+address1+"</a>";
+        var title_map = "<a href='https://www.google.com.tw/search?q="+address1+"+google+map'>"+address1+"</a>";
+        var redirect_link = "<?php header('Location: https://www.google.com.tw/search?q="+address1+"+google+map'>"+address1+"');?>";
+        var html = '<a href="http://localhost:80/gmap_sample/getData.php?address='+address1+'">'+address1+'</a>';
+        var html4 = '<html><head></head><body><div id='+address1+'>'+address1+'</div></body></html>';
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            title : address1
+        }); // end maker
+        var infowindow = new google.maps.InfoWindow({
+            content: html4
+        });
+
+  
+        marker.addListener('click', function() {
+            initialize(address1);
+            infowindow.open(map, marker);
+        });
+      } // end if 
+      else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      } // end else
+    }); // end geocoder
+  } // end function
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAtM83_HNs2MhPvu2YnahlOEzrnntmAJI&callback=initMap"
+            async defer></script>
+    <script>
+    {% include 'map/highchart.js' %}
+    </script>
+    
+</body>
+</html>
