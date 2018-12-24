@@ -24,6 +24,8 @@ SECRET_KEY = 'z6sys&p(2iim6@f-n9yciw8fa2s#@zgb&-!+(a%9gmte)57mau'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if 'DYNO' in os.environ:    # Running on Heroku
+    DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,17 +83,23 @@ WSGI_APPLICATION = 'iot.wsgi.application'
 #        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #    }
 #}
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'iotdb',
-        'USER': 'iot',
-        'PASSWORD': 'iot',
-        'HOST': 'localhost',
-        'PORT': '',
+if DEBUG:   # Running on the development environment
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'iotdb',
+            'USER': 'iot',
+            'PASSWORD': 'iot',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
-
+else:   # Running on Heroku
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES = {'default':dj_database_url.config()}
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -134,3 +142,6 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'account.User'
 
 LOGIN_URL = '/account/login/'
+
+# For Heroku deployment
+STATIC_ROOT = 'staticfiles'

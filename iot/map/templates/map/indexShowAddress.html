@@ -17,6 +17,30 @@
              padding: 0;
          }
     </style>
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/owl.carousel.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/cssl/owl.theme.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/component.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/normalize.css' %}" />
+    <link href="{% static 'main/css/pace-theme-flash.css' %}" rel="stylesheet" type="text/css"
+        media="screen" />
+    <!-- BEGIN CORE CSS FRAMEWORK -->
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/bootstrapTheme.css' %}">
+    <link href="{% static 'main/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END CORE CSS FRAMEWORK -->
+    <!-- BEGIN CSS TEMPLATE -->
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'main/css/magic_space.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'main/css/responsive.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'main/css/animate.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END CSS TEMPLATE -->
+    <script type="text/javascript" src="{% static 'main/js/jquery-1.8.3.min.js' %}"></script>
+    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script type="text/javascript" src="{% static 'main/js/slider1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/slider2.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/settings.css' %}" media="screen" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--include the jQuery library-->
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>     
@@ -25,7 +49,76 @@
         <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 </head>
 <body>
-    <div id="map"></div>
+   <div class="main-wrapper">
+        <header id="ha-header" class="ha-header ha-header-hide ">
+            <div class="ha-header-perspective">
+                <div class="ha-header-front navbar navbar-default">
+                    <div class="compressed">
+                        <div class="navbar-header">
+                            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle"
+                                type="button">
+                                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                                    class="icon-bar"></span><span class="icon-bar"></span>
+                            </button>
+                            <a href="#" class="navbar-brand compressed">
+                                <h2>IoT</h2></a>
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            {% include 'main/menu.html' %}
+                            
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="section ha-waypoint" data-animate-down="ha-header-hide" data-animate-up="ha-header-hide">
+            <div role="navigation" class="navbar navbar-transparent navbar-top">
+                <div class="container">
+                    <div class="compressed">
+                        <div class="navbar-header">
+                            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle"
+                                type="button">
+                                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                                    class="icon-bar"></span><span class="icon-bar"></span>
+                            </button>
+                            <a href="#" class="navbar-brand">
+                                <h1>IoT</h1>
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                {% include 'main/menu.html' %}
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+            <!--BEGIN SLIDER -->
+            <div class="tp-banner-container">
+                <div class="tp-banner" id="home">                                   
+                            <div id="map" class="tp-caption mediumlarge_light_white_center sft tp-resizeme slider" data-x="center"
+                                data-hoffset="0" data-y="80" data-speed="500" data-start="800" data-easing="Power4.easeOut"
+                                data-endspeed="300" data-endeasing="Power1.easeIn" data-captionhidden="off" style="z-index: 6">
+                                <!-- <h2 class="text-white custom-font title ">
+                                    We Create<br>
+                                    Brands & Marketing
+                                    <br />
+                                    Strategies for Customers</h2> -->
+                            </div>
+                    <div class="tp-bannertimer">
+                    </div>
+                </div>
+                <div style="position: absolute; top: 469px; margin-top: -20px; left: 20px;" class="tp-leftarrow tparrows default"></div>
+                <div style="position: absolute; top: 469px; margin-top: -20px; right: 20px;" class="tp-rightarrow tparrows default hidearrows"></div>
+            </div>
+            <!--END SLIDER
+    
+  -->
+        </div>
+       
+    </div>
+    <!-- <div id="map"></div> -->
     <script>
         
         var map;
@@ -105,6 +198,14 @@ function codeAddress(address1){
     <script>
     {% include 'map/highchart.js' %}
     </script>
-    
+    <script src="{% static 'main/js/bootstrap.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/pace.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/jquery.unveil.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/owl.carousel.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/waypoints.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/jquery.nicescroll.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/jquery.appear.js' %}"></script>
+    <script src="{% static 'main/js/jquery.animateNumbers.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'main/js/core.js' %}"></script>
 </body>
 </html>

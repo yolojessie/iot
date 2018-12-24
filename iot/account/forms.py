@@ -3,11 +3,11 @@ from account.models import User
 
 
 class UserForm(forms.ModelForm):
-    username = forms.CharField(label='帳號')
-    password = forms.CharField(label='密碼', widget=forms.PasswordInput())
-    password2 = forms.CharField(label='確認密碼', widget=forms.PasswordInput())
-    fullName = forms.CharField(label='姓名', max_length=128)
-    address = forms.CharField(label='住址', max_length=128)
+    username = forms.CharField(label='帳號', widget=forms.TextInput(attrs={'class':'input100'}))
+    password = forms.CharField(label='密碼', widget=forms.PasswordInput(attrs={'class':'input100'}))
+    password2 = forms.CharField(label='確認密碼', widget=forms.PasswordInput(attrs={'class':'input100'}))
+    fullName = forms.CharField(label='姓名', widget=forms.TextInput(attrs={'class':'input100'}), max_length=128)
+    address = forms.CharField(label='住址', widget=forms.TextInput(attrs={'class':'input100'}), max_length=128)
     
     class Meta:
         model = User
