@@ -45,8 +45,9 @@
     <!--include the jQuery library-->
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>     
         <!--include the highcharts library-->
-        <script src="http://code.highcharts.com/stock/highstock.js"></script>
-        <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <!--<script src="http://code.highcharts.com/stock/highstock.js"></script>
+        <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>-->
 </head>
 <body>
    <div class="main-wrapper">
@@ -144,7 +145,7 @@
             	 //console.log(data['lightAddresses']);
             	 for (i = 0; i < data['lightAddresses'].length; i++) {
                   codeAddress(data['lightAddresses'][i].toString());
-                  //console.log(data['lightAddresses'][i].toString());
+                  console.log(data['lightAddresses'][i].toString());
                }
              })
              .fail(function() {

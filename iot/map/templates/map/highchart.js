@@ -9,7 +9,7 @@ function initialize(adr)
                     //success:  getDataSuccesss
             }).done(function(data) {
             	console.log('get Data success!!');
-    			//console.log(data);
+    			console.log(data);
                 var val = []; //用以存放光敏電阻值
                 var stime = []; //用以存放sample time
                 var dataNum = data['lightAddresses'].length; //資料筆數
