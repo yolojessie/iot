@@ -18,7 +18,7 @@ function initialize(adr)
                     val.push(parseInt(data['lightAddresses'][i]['value']));//將每筆光敏值放入陣列val中
                     stime.push(data['lightAddresses'][i]['time'].toString());//將每筆光敏值的時間放入陣列stime中
                 }
-                //console.log(data['lightAddresses']);
+                console.log(data['lightAddresses']);
                 
                 //console.log('val[]',val);
                 //console.log('stime[]',stime);
