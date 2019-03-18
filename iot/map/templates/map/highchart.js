@@ -1,6 +1,6 @@
 function initialize(adr)
         {           
-            //var param = location.search.split("?")
+            //var param = location.search.split("?").
             $.ajax({                                      
                 url: "{% url 'map:getData' %}", //用以讀取資料的檔案  
                 data: {'address': adr},//param[1],             //參數，若有需要可以傳遞給php檔，例如"id=5&parent=6"
