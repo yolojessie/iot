@@ -31,7 +31,7 @@ def ml(request):
 
 def train(request):
     #path = 'C:/Users/帥哥/webapps/git/iot/iot/ml/'
-    path = 'iot/ml'
+    path = 'ml/'
     print('readcsv...')
     train = pd.read_csv(path+"train.csv")
     test = pd.read_csv(path+"test.csv")
@@ -115,7 +115,7 @@ def isSurvive(request):
     
     survive = surviveForm.save(commit=False)
     #path = 'C:/Users/帥哥/webapps/git/iot/iot/ml/'
-    path = 'iot/ml/'
+    path = 'ml/'
     with open(path+'model.pickle', 'rb') as f:
         trainedClassifier = pickle.load(f)
         
