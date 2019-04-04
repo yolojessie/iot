@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main',
     'map',
     'account',
+    'ml',
 ]
 
 MIDDLEWARE = [

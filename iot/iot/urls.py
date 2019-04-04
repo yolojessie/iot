@@ -22,5 +22,6 @@ urlpatterns = [
     path('main/', include('main.urls', namespace='main')),
     path('map/', include('map.urls', namespace='map')),
     path('account/', include('account.urls', namespace='account')),
+    path('ml/', include('ml.urls', namespace='ml')),
     re_path('.*', views.main),
 ]

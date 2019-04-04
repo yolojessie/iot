@@ -1,0 +1,285 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+{% block css %}
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
+{% endblock %}
+{% block heading %}ML APP{% endblock %}
+{% block content %}
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Always expand</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'main:main' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
+      </div>
+    </nav>
+    
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <span data-feather="home"></span>
+                  Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  Products
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="users"></span>
+                  Customers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  Reports
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="layers"></span>
+                  Integrations
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Current month
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Last quarter
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+              </button>
+            </div>
+          </div>
+
+          <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+
+          <h2>Section title</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>User Name</th>
+                  <th>Ticket_info</th>
+                  <th>Age</th>
+                  <th>Embarked</th>
+                  <th>Fare</th>
+                  <th>Pclass</th>
+                  <th>Sex</th>
+                  <th>Family_Size</th>
+                  <th>Title2</th>  
+                  <th>Cabin</th>
+                  <th>isSurvived</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for survive in survives %}
+                <tr>
+                  <td data-th="User Name">{{ survive.user.fullName }}</td>
+                  <td data-th="Ticket_info">{{ survive.Ticket_info }}</td>
+                  <td data-th="Age">{{ survive.Age }}</td>
+                  <td data-th="Embarked">{{ survive.Embarked }}</td>
+                  <td data-th="Fare">{{ survive.Fare }}</td>
+                  <td data-th="Pclass">{{ survive.Pclass }}</td>
+                  <td data-th="Sex">{{ survive.Sex|yesno:"M,F" }}</td>
+                  <td data-th="Family_Size">{{ survive.Family_Size }}</td>
+                  <td data-th="Title2">{{ survive.Title2 }}</td>
+                  <td data-th="Cabin">{{ survive.Cabin }}</td>
+                  <td data-th="isSurvived">
+                  {% if not forloop.last %}
+                    {{ survive.survive|yesno:"S,D" }}
+                  {% else %}
+                    <font color="red">{{ survive.survive|yesno:"S,D" }}</font>
+                  {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+              <tr>
+                  <td >{{ request.user.fullName }}</td>
+                  <td >random</td>
+               <form class=form method=post action="{% url 'ml:isSurvive' %}">             
+                    {% csrf_token %}
+                  <td>{{ surviveForm.Age }}{% if surviveForm.Age.errors %}<span class=errors>{{ surviveForm.Age.errors }}</span>{% endif %}</td>
+                  <td>{{ surviveForm.Embarked }}{% if surviveForm.Embarked.errors %}<span class=errors>{{ surviveForm.Embarked.errors }}</span>{% endif %}</td>
+                  <td>{{ surviveForm.Fare }}{% if surviveForm.Fare.errors %}<span class=errors>{{ surviveForm.Fare.errors }}</span>{% endif %}</td>
+                  <td>{{ surviveForm.Pclass }}{% if surviveForm.Pclass.errors %}<span class=errors>{{ surviveForm.Pclass.errors }}</span>{% endif %}</td>
+                  <td>{{ surviveForm.Sex }}{% if surviveForm.Sex.errors %}<span class=errors>{{ surviveForm.Sex.errors }}</span>{% endif %}</td>
+                  <td>{{ surviveForm.Family_Size }}{% if surviveForm.Family_Size.errors %}<span class=errors>{{ surviveForm.Family_Size.errors }}</span>{% endif %}</td>
+                  <td>{{ surviveForm.Title2 }}{% if surviveForm.Title2.errors %}<span class=errors>{{ surviveForm.Title2.errors }}</span>{% endif %}</td>
+                  <td>{{ surviveForm.Cabin }}{% if surviveForm.Cabin.errors %}<span class=errors>{{ surviveForm.Cabin.errors }}</span>{% endif %}</td>               
+                  <td ><button type=submit class='btn btn-secondary btn-lg' value='predict'>predict</button></td>
+                </form>
+               </tr> 
+                         
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["Survived", "Dead"],
+          datasets: [{
+            data: [320+{{ countS }}, 560+{{ countD }}],
+            backgroundColor: ['rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)'],
+            borderColor:['rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)'],
+            borderWidth: 1,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script>
+    <script>
+    $(document).ready(function(){
+    	$Embarked = $('td[data-th="Embarked"]');
+    	var embarked = {0:'C', 1:'Q', 2:'S'};
+    	$Embarked.each(function(){
+    		console.log($(this).html());
+    		var temp =$(this).html();
+    		$(this).html(embarked[temp]);
+    	});
+    	
+    	$Pclass = $('td[data-th="Pclass"]');
+        var pclass = {0:'1st', 1:'2nd', 2:'3rd'};
+        $Pclass.each(function(){
+          console.log($(this).html());
+          var temp =$(this).html();
+          $(this).html(pclass[temp]);
+        });
+        
+        $Title2 = $('td[data-th="Title2"]');
+        var title2 = {0:'Mr', 1:'Mrs', 2:'Miss', 3:'Master'};
+        $Title2.each(function(){
+          console.log($(this).html());
+          var temp =$(this).html();
+          $(this).html(title2[temp]);
+        });
+        
+        $Cabin = $('td[data-th="Cabin"]');
+        var cabin = {0:'noCabin', 1:'C', 2:'E', 3:'G', 4:'D', 5:'A', 6:'B', 7:'F', 8:'T'};
+        $Cabin.each(function(){
+          console.log($(this).html());
+          var temp =$(this).html();
+          $(this).html(cabin[temp]);
+        });
+        
+        $Fare = $('td[data-th="Fare"]');
+        $Fare.each(function(){
+          console.log($(this).html());
+          var temp =$(this).html();
+          $(this).html(temp+' $US');
+        });
+    	
+    });
+    </script>
+{% endblock %}
+{% block script %}
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+{% endblock %}
