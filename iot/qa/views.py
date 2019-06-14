@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 # from django.http.response import HttpResponse
-from sklearn import preprocessing 
 import pandas as pd
 import numpy as np
 from numpy.linalg import norm
@@ -62,7 +61,7 @@ def qa(request):
     print(cwd)
     return render(request, template, context)
 
-
+@login_required
 def answer(request): 
     context = {}
     # 把檔案讀出來
@@ -139,7 +138,7 @@ def retrieve(testing_sentence, return_num=3):  ## 定義出檢索引擎
     idxs = np.array(sorted(score_dict.items(), key=lambda x:x[1], reverse=True))[:return_num, 0]  ##排序出最相關的前N個問題的row index
     return df_question.loc[idxs, ['title', 'url']]
 
-
+@login_required
 def saveKeyword(request):
     '''
     TODO:把這個function做成ajax

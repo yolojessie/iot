@@ -1,6 +1,6 @@
 from pywebpush import webpush, WebPushException
 from django.http.response import HttpResponse
-import datetime
+# import datetime
 import json
 
 

@@ -1,13 +1,13 @@
 from django.http.response import HttpResponse
-from django.utils import timezone
+# from django.utils import timezone
 from qa.views import retrieve
 from qa.webPush import pushMsg
 from account.models import User
-from datetime import date
-from iot.settings import DOMAIN
-from django.urls.base import reverse
-from dateutil.relativedelta import relativedelta
-import pandas as pd
+# from datetime import date
+# from iot.settings import DOMAIN
+# from django.urls.base import reverse
+# from dateutil.relativedelta import relativedelta
+# import pandas as pd
 
 def notify(request):
 #     now = timezone.now()
