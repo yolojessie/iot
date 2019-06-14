@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'map',
     'account',
     'ml',
+    'qa',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +148,15 @@ LOGIN_URL = '/account/login/'
 
 # For Heroku deployment
 STATIC_ROOT = 'staticfiles'
+
+
+# Domain name
+if DEBUG:
+    DOMAIN = 'http://localhost:8000'
+else:
+    DOMAIN = 'https://iotsh.herokuapp.com/'
+
+
+
+
+

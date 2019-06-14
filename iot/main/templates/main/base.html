@@ -2,14 +2,13 @@
 {% load staticfiles %}
 <html>
   <head>
-    <title>IoT</title>
+    <title>{% block heading %}{% endblock %}</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
     {% block css %}{% endblock %}
+    {% block head %}{% endblock %}
   </head>
   <body>
-   
-    <h2>IoT -- {% block heading %}{% endblock %}</h2>
     
     {% block content %}{% endblock %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -1,0 +1,11 @@
+{% load pwa %}
+{
+  "name": {{ PWA_APP_NAME|js }},
+  "short_name": {{ PWA_APP_SHORT_NAME|js }},
+  "description": {{ PWA_APP_DESCRIPTION|js }},
+  "theme_color": {{ PWA_APP_THEME_COLOR|js }},
+  "background_color": {{ PWA_APP_BACKGROUND_COLOR|js }},
+  "display": {{ PWA_APP_DISPLAY|js }},
+  "icons": {{ PWA_APP_ICONS|js }},
+  "start_url": {{ PWA_APP_START_URL|js }}
+}

@@ -23,5 +23,7 @@ urlpatterns = [
     path('map/', include('map.urls', namespace='map')),
     path('account/', include('account.urls', namespace='account')),
     path('ml/', include('ml.urls', namespace='ml')),
+    path('qa/', include('qa.urls', namespace='qa')),
+    path('', include('pwa.urls')),
     re_path('.*', views.main),
 ]
