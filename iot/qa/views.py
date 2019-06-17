@@ -44,7 +44,7 @@ def toint(num):
         return int(num)
      
 
-df_QA = pd.read_json('Gossiping.json', encoding='utf8')# ProcessedData
+df_QA = pd.read_json('qa/Gossiping.json', encoding='utf8')# ProcessedData
 df_QA = df_QA[:1000]
 temp_df = df_QA['tweets']
 temp_df[temp_df==''] = 0
@@ -120,7 +120,7 @@ def answer(request):
 
 def cloud(request):
     all_terms_cloud = []
-    with open('stops.txt', 'r', encoding='utf8') as f:  
+    with open('qa/stops.txt', 'r', encoding='utf8') as f:  
         stops = f.read().split('\n') 
     stops.append('問卦')
     stops.append('https')
@@ -132,7 +132,7 @@ def cloud(request):
     stops.append('\nRe')
     stops.append('新聞')
     # 把檔案讀出來
-    df_QA = pd.read_json('Gossiping.json', encoding='utf8')# ProcessedData
+    df_QA = pd.read_json('qa/Gossiping.json', encoding='utf8')# ProcessedData
     # 我們這次只會使用到title跟url這兩個欄位
     df_question = df_QA[['title', 'content']].copy()  ## 不要更動到原始的DataFrame
     df_question.drop_duplicates(inplace=True)  ## 丟掉重複的資料
@@ -145,7 +145,7 @@ def cloud(request):
     cloud_pct = plt.imread('cloud.jpg')
     wordcloud = WordCloud(background_color='white',
                               mask=cloud_pct,
-                              font_path="simsun.ttf")  ##做中文時務必加上字形檔
+                              font_path="qa/simsun.ttf")  ##做中文時務必加上字形檔
     wordcloud.generate_from_frequencies(frequencies=Counter(all_terms_cloud))
     
 #     plt.figure(figsize=(15,15))
@@ -223,7 +223,7 @@ def train_model(request):
     X_train, X_test, y_train, y_test = train_test_split(x, y_train, test_size=0.2, random_state=42)
     xgr.fit(X_train, y_train,eval_set=[(X_train, y_train), (X_test, y_test)], early_stopping_rounds=200)
     print('open file..\n')
-    trainedReggresor = open('xgbmodel.pickle', 'wb')
+    trainedReggresor = open('qa/xgbmodel.pickle', 'wb')
     print('done\n')
     print('xgbmodel pickle...')
     pickle.dump(xgr, trainedReggresor)
@@ -231,7 +231,7 @@ def train_model(request):
     print('done')
     
     print('open file..\n')
-    trainscaler = open('scaler.pickle', 'wb')
+    trainscaler = open('qa/scaler.pickle', 'wb')
     print('done\n')
     print('scaler pickle...')
     pickle.dump(scaler, trainscaler)
@@ -241,7 +241,7 @@ def train_model(request):
 
 
 def predict_tweets(keyword):
-    path = ''#qa/
+    path = 'qa/'
     with open(path+'xgbmodel.pickle', 'rb') as f:
         trainedReggresor = pickle.load(f)
     with open(path+'scaler.pickle', 'rb') as f:
@@ -258,7 +258,7 @@ def predict_tweets(keyword):
     
     
 def hotKeyword(df_vector):
-    with open('stops.txt', 'r', encoding='utf8') as f:  
+    with open('qa/stops.txt', 'r', encoding='utf8') as f:  
         stops = f.read().split('\n') 
     stops.append('\n')
     stops.append('\t')
