@@ -223,10 +223,9 @@ def train_model(request):
     temp = temp.apply(tolist)
     temp = list(temp.values)
     x = np.array(temp)
-    xgr = XGBRegressor(n_estimators=300, learning_rate=0.01, gamma=0, subsample=0.85,
-                            colsample_bytree=0.8, max_depth=20, min_child_weight = 11,n_jobs = 4)
+    xgr = XGBRegressor(n_estimators=150, learning_rate=0.01,n_jobs = 2)# gamma=0, subsample=0.85, colsample_bytree=0.8, max_depth=20, min_child_weight = 11
     X_train, X_test, y_train, y_test = train_test_split(x, y_train, test_size=0.2, random_state=42)
-    xgr.fit(X_train, y_train,eval_set=[(X_train, y_train), (X_test, y_test)], early_stopping_rounds=200)
+    xgr.fit(X_train, y_train,eval_set=[(X_train, y_train), (X_test, y_test)], early_stopping_rounds=100)
     print('open file..\n')
     trainedReggresor = open('xgbmodel.pickle', 'wb')
     print('done\n')
