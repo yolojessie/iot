@@ -89,6 +89,7 @@ gc.collect()
 @login_required    
 def qa(request):
     keyword = request.user.keyword
+    print(keyword)
     tweets = None
     if keyword:
         tweets = predict_tweets(keyword)  
@@ -201,6 +202,7 @@ def saveKeyword(request):
     for user in users:
         user.keyword = keyword
         user.save()
+    print(keyword)
     tweets = predict_tweets(keyword)
     labels,values = hotKeyword(df_vector) 
     context = {'answer':'', 'keyword':keyword, 'tweets':tweets
@@ -226,7 +228,7 @@ def train_model(request):
     X_train, X_test, y_train, y_test = train_test_split(x, y_train, test_size=0.2, random_state=42)
     xgr.fit(X_train, y_train,eval_set=[(X_train, y_train), (X_test, y_test)], early_stopping_rounds=200)
     print('open file..\n')
-    trainedReggresor = open('qa/xgbmodel.pickle', 'wb')
+    trainedReggresor = open('xgbmodel.pickle', 'wb')
     print('done\n')
     print('xgbmodel pickle...')
     pickle.dump(xgr, trainedReggresor)
@@ -234,7 +236,7 @@ def train_model(request):
     print('done')
     
     print('open file..\n')
-    trainscaler = open('qa/scaler.pickle', 'wb')
+    trainscaler = open('scaler.pickle', 'wb')
     print('done\n')
     print('scaler pickle...')
     pickle.dump(scaler, trainscaler)
@@ -247,15 +249,22 @@ def predict_tweets(keyword):
     path = 'qa/'
     with open(path+'xgbmodel.pickle', 'rb') as f:
         trainedReggresor = pickle.load(f)
-    with open(path+'scaler.pickle', 'rb') as f:
-        trainedscaler = pickle.load(f)
+    with open(path+'scaler.pickle', 'rb') as f2:
+        trainedscaler = pickle.load(f2)
     terms = [t for t in jieba.analyse.extract_tags(keyword, topK=10)]
+    #print(terms)
     question = terms_to_vector(terms)
+    #print(cosine_similarity(question,terms_to_vector(['柯文'])))
     question = question.reshape(1,termindexLen)
+    #print(question)
+    #print(trainedReggresor)
     tweets = trainedReggresor.predict(question).reshape(-1,1)
+    #print(tweets)
+    #print(trainedscaler)
     tweets = trainedscaler.inverse_transform(tweets)
     tweets = int(tweets)
-
+    #print(tweets)
+    
     return tweets
     
     
