@@ -10,4 +10,6 @@ urlpatterns = [
     path('subscription/', webPush.subscription, name='subscription'),
     path('notify/', qaCronJob.notify, name='notify'),
     path('saveKeyword/', views.saveKeyword, name='saveKeyword'),
+    path('train/', views.train_model, name='train'),
+    path('scrap/', scrap.scrapPTT, name='scrap'),
 ]

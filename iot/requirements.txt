@@ -25,3 +25,5 @@ http-ece==1.1.0
 py-vapid==1.6.0
 pywebpush==1.9.4
 requests==2.22.0
+xgboost==0.90
+bs4==0.0.1

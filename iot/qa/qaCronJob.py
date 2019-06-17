@@ -23,11 +23,11 @@ def notify(request):
         df_ans = retrieve(user.keyword,return_num=1)
         title = ''
         url = ''
-        for q in df_ans['title']:
-            title = q
-            url = str(df_ans[df_ans['title']==q]['url'].values[0])
+        for q in df_ans[['title','url']].values:
+            title = q[0]
+            url = q[1]
         pushMsg(user, f'標題 : {title}\n網址 : {url}\n',   #開始時間 : {date.strftime(timezone.localtime(progress.startDateTime), "%Y-%m-%d %H:%M")}',
-                str(df_ans[df_ans['title']==q]['url'].values[0]))
+                url)
 #         pushMsg(user, 'Succese!!!', 'localhost:8000/')
 
     return HttpResponse(True)
