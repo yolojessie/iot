@@ -1,5 +1,5 @@
 from django.urls import path
-from qa import views, webPush, qaCronJob
+from qa import views, webPush, qaCronJob, scrap
 
 
 app_name = 'qa'
