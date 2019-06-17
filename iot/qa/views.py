@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from numpy.linalg import norm
 import random
-
+import gc
 import pickle
 
 #wordcloud
@@ -44,7 +44,7 @@ def toint(num):
         return int(num)
      
 
-df_QA = pd.read_json('qa/Gossiping.json', encoding='utf8')# ProcessedData
+df_QA = pd.read_json('Gossiping.json', encoding='utf8')# ProcessedData
 df_QA = df_QA[:1000]
 temp_df = df_QA['tweets']
 temp_df[temp_df==''] = 0
@@ -80,8 +80,10 @@ for term in termindex:  ## 對index中的詞彙跑回圈
 
 df_question['vector'] = df_question['processed'].apply(terms_to_vector)  ## 將上面定義的f
 print('idf...done')
-df_vector = df_question
- 
+df_vector = df_question['title','url','tweets'].copy()
+del df_question
+del all_terms
+gc.collect()
     
     
 def qa(request):
@@ -132,7 +134,7 @@ def cloud(request):
     stops.append('\nRe')
     stops.append('新聞')
     # 把檔案讀出來
-    df_QA = pd.read_json('qa/Gossiping.json', encoding='utf8')# ProcessedData
+    df_QA = pd.read_json('Gossiping.json', encoding='utf8')# ProcessedData
     # 我們這次只會使用到title跟url這兩個欄位
     df_question = df_QA[['title', 'content']].copy()  ## 不要更動到原始的DataFrame
     df_question.drop_duplicates(inplace=True)  ## 丟掉重複的資料
