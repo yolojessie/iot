@@ -253,6 +253,7 @@ def predict_tweets(keyword):
     terms = [t for t in jieba.cut_for_search(keyword)]
     print(terms)
     question = terms_to_vector(terms)
+    print(question.sum())
     print(cosine_similarity(question,terms_to_vector(['柯文','哲' ])))
     question = question.reshape(1,termindexLen)
     print(question)
