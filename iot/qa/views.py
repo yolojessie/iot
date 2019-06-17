@@ -45,7 +45,6 @@ def toint(num):
      
 path='qa/'
 df_QA = pd.read_json(path+'Gossiping.json', encoding='utf8')# ProcessedData
-df_QA = df_QA[:1000]
 temp_df = df_QA['tweets']
 temp_df[temp_df==''] = 0
 df_QA['tweets'] = temp_df
@@ -84,6 +83,7 @@ df_vector = df_question.copy()
 del df_question
 del df_QA
 del all_terms
+del temp_df
 gc.collect()
     
 @login_required    
