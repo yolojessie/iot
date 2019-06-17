@@ -80,8 +80,9 @@ for term in termindex:  ## 對index中的詞彙跑回圈
 
 df_question['vector'] = df_question['processed'].apply(terms_to_vector)  ## 將上面定義的f
 print('idf...done')
-df_vector = df_question['title','url','tweets'].copy()
+df_vector = df_question.copy()
 del df_question
+del df_QA
 del all_terms
 gc.collect()
     
