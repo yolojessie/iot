@@ -43,8 +43,8 @@ def terms_to_vector(terms):  ## 定義把terms轉換成向量的function
 def toint(num):
         return int(num)
      
-
-df_QA = pd.read_json('qa/Gossiping.json', encoding='utf8')# ProcessedData
+path='qa/'
+df_QA = pd.read_json(path+'Gossiping.json', encoding='utf8')# ProcessedData
 df_QA = df_QA[:1000]
 temp_df = df_QA['tweets']
 temp_df[temp_df==''] = 0
@@ -270,7 +270,8 @@ def predict_tweets(keyword):
     
     
 def hotKeyword(df_vector):
-    with open('qa/stops.txt', 'r', encoding='utf8') as f:  
+    path='qa/'
+    with open(path+'stops.txt', 'r', encoding='utf8') as f:  
         stops = f.read().split('\n') 
     stops.append('\n')
     stops.append('\t')
