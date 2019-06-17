@@ -86,7 +86,7 @@ del df_QA
 del all_terms
 gc.collect()
     
-    
+@login_required    
 def qa(request):
     keyword = request.user.keyword
     tweets = None
