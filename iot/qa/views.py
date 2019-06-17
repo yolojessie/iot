@@ -251,19 +251,19 @@ def predict_tweets(keyword):
         trainedReggresor = pickle.load(f)
     with open(path+'scaler.pickle', 'rb') as f2:
         trainedscaler = pickle.load(f2)
-    terms = [t for t in jieba.analyse.extract_tags(keyword, topK=10)]
-    #print(terms)
+    terms = [t for t in jieba.cut_for_search(keyword)]
+    print(terms)
     question = terms_to_vector(terms)
-    #print(cosine_similarity(question,terms_to_vector(['柯文'])))
+    print(cosine_similarity(question,terms_to_vector(['柯文','哲' ])))
     question = question.reshape(1,termindexLen)
-    #print(question)
-    #print(trainedReggresor)
+    print(question)
+    print(trainedReggresor)
     tweets = trainedReggresor.predict(question).reshape(-1,1)
-    #print(tweets)
-    #print(trainedscaler)
+    print(tweets)
+    print(trainedscaler)
     tweets = trainedscaler.inverse_transform(tweets)
     tweets = int(tweets)
-    #print(tweets)
+    print(tweets)
     
     return tweets
     
