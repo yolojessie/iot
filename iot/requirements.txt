@@ -20,7 +20,7 @@ kiwisolver==1.1.0
 pyparsing==2.4.0
 cycler==0.10.0
 matplotlib==3.0.3
-cryptography==2.7
+cryptography==3.2
 http-ece==1.1.0
 py-vapid==1.6.0
 pywebpush==1.9.4
